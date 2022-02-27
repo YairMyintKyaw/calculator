@@ -5,10 +5,12 @@ body{
     align-items: center;
     height: 100vh;
     width: 100vw;
+    margin: 0;
+    padding: 0;
 }
 
 .mainContainer{
-    flex:1 0 auto;
+    flex:1 1 auto;
     max-width: 300px;
     height: 350px;
     border-radius: 10px;
@@ -17,7 +19,6 @@ body{
     flex-direction: column;
     align-items: center;
     padding: 3px;
-
 }
 
 .inputContainer{
@@ -77,6 +78,10 @@ body{
     flex: 3 1 0;
 }
 
+.operators{
+    flex:2 1 0;
+}
+
 
 .numberBtnRow{
     width: 100%;
@@ -114,6 +119,4 @@ body{
     background-color: rgb(255, 180, 40);
 }
 
-.operators{
-    flex:2 1 0;
-}
+
