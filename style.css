@@ -1,6 +1,7 @@
 body{
     background-color:#92140c;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -8,10 +9,12 @@ body{
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
+    
 }
 
+
+
 .mainContainer{
-    flex:1 1 auto;
     max-width: 300px;
     height: 350px;
     border-radius: 10px;
@@ -124,7 +127,13 @@ body{
     background-color: aliceblue;
 }
 
-
+.operatorBtn{
+    background-color: #ad190e;
+    -moz-box-shadow:    inset  -8px -8px 3px #70120a;
+    -webkit-box-shadow: inset  -8px -8px 3px #70120a;
+    box-shadow:         inset  -8px -8px 3px #70120a;
+    color: #ede6e3;
+}
 
 .orangeBackground{
     background-color: orange;

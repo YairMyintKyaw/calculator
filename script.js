@@ -177,7 +177,7 @@ for(let i=0;i<4;i++){
             break;
         }else{
             const numberBtn=document.createElement('div');
-            numberBtn.classList.add('numberBtn','rightNumber');
+            numberBtn.classList.add('numberBtn');
             if(index==0 || index==1){
                 numberBtn.classList.add('orangeBackground')
             }
@@ -185,6 +185,7 @@ for(let i=0;i<4;i++){
             numberBtn.addEventListener('click',clickAnimation)
             if(index>1 && index<operatorSymbols.length-1){
                 numberBtn.addEventListener('click',numberAndOperatorInput.bind(null,numberBtn.textContent))
+                numberBtn.classList.add('operatorBtn')
             }else if(operatorSymbols[index]=='AC'){
                 numberBtn.addEventListener('click',()=>{
                     input.value='';
