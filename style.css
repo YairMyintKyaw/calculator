@@ -7,6 +7,7 @@ body{
     width: 100vw;
     margin: 0;
     padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .mainContainer{
@@ -14,11 +15,15 @@ body{
     max-width: 300px;
     height: 350px;
     border-radius: 10px;
+    border: solid 0.5px #96918e;
     background-color: #ede6e3;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 3px;
+    padding: 10px;
+    -moz-box-shadow:    inset  -8px -8px 3px #5f5b59;
+    -webkit-box-shadow: inset  -8px -8px 3px #5f5b59;
+    box-shadow:         inset  -8px -8px 3px #5f5b59;
 }
 
 .inputContainer{
@@ -26,7 +31,7 @@ body{
     display: flex;
     flex-direction: column;
     width: 100%;
-    background-color: #1e1e24;
+    background-color: #588157;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     color: white;
@@ -61,9 +66,10 @@ body{
     display: flex;
     width: 100%;
     gap: 2px;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
     overflow: hidden;
+
 }
 
 .numberContainer,.operators{
@@ -104,6 +110,14 @@ body{
     cursor: pointer;
     font-size: 20px;
     user-select: none;
+    -moz-box-shadow:    inset  -8px -8px 3px #96918e;
+    -webkit-box-shadow: inset  -8px -8px 3px #96918e;
+    box-shadow:         inset  -8px -8px 3px #96918e;
+    transition: all .3s ease-in;
+}
+
+.clicked{
+    transform: scale(-0.1);
 }
 
 .numberBtn:hover{
@@ -114,6 +128,9 @@ body{
 
 .orangeBackground{
     background-color: orange;
+    -moz-box-shadow:    inset  -8px -8px 3px rgb(143, 93, 0);
+    -webkit-box-shadow: inset  -8px -8px 3px rgb(143, 93, 0);
+    box-shadow:         inset  -8px -8px 3px rgb(143, 93, 0);
 }
 
 .orangeBackground:hover{

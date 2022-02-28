@@ -102,6 +102,7 @@ function numberAndOperatorInput(key){
     }
     input.value+=key=='*'?'x':key=='/'?'÷':key;
     result.textContent=`Ans:${showResult(numbersToBeOperated,number)}`
+    
 }
 
 function showResult(list,lastNumber){
@@ -152,9 +153,6 @@ let operatorSymbols=['AC','DEL','÷','x','-','+','=']
 let index=0;
 for(let i=0;i<4;i++){
     
-    function buttonFunction(){
-        input.value+=this.textContent
-    }   
     //number buttons
     
     const LnumberBtnRow=document.createElement('div');
@@ -166,6 +164,7 @@ for(let i=0;i<4;i++){
         numberBtn.textContent=text=='0'?'^':text=='-1'?'.':text=='-2'?'0':text
         LnumberBtnRow.append(numberBtn)
         numberBtn.addEventListener('click',numberAndOperatorInput.bind(null,numberBtn.textContent))
+        numberBtn.addEventListener('click',clickAnimation)
         text--;
     }
     numberButtons.append(LnumberBtnRow)
@@ -183,6 +182,7 @@ for(let i=0;i<4;i++){
                 numberBtn.classList.add('orangeBackground')
             }
             numberBtn.textContent=operatorSymbols[index];
+            numberBtn.addEventListener('click',clickAnimation)
             if(index>1 && index<operatorSymbols.length-1){
                 numberBtn.addEventListener('click',numberAndOperatorInput.bind(null,numberBtn.textContent))
             }else if(operatorSymbols[index]=='AC'){
@@ -210,3 +210,10 @@ for(let i=0;i<4;i++){
     operators.append(RnumberBtnRow)
 }
 
+//Click animation
+function clickAnimation(){
+    this.classList.add('clicked')
+    setTimeout(() => {
+        this.classList.remove('clicked')
+    }, 100);
+}
