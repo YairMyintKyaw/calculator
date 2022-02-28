@@ -33,10 +33,13 @@ const result = document.querySelector('.result')
 const input=document.querySelector('input');
 const numbersToBeOperated=[]
 let number='';
+input.addEventListener('touch',()=>{
+    if(document.body.offsetWidth<600) input.blur()
+    else input.focus()
+})
 input.addEventListener('keydown',(e)=>{
     e.preventDefault()
     let key=e.key;
-    console.log(key)
     if(key=='Backspace'){
         backspace()
     }else if(key.match(/^F[1-9]|^F1[0-2]$/)){
@@ -58,7 +61,8 @@ window.addEventListener('load',()=>{
 })
 
 function backspace(){
-    input.focus()
+    if(document.body.offsetWidth<600) input.blur()
+    else input.focus()
     let lastCharacter=input.value[input.value.length-1]
     if(lastCharacter=='+'||lastCharacter=='-'||lastCharacter=='x'||lastCharacter=='÷' || lastCharacter=='^'){
         numbersToBeOperated.pop()
@@ -81,7 +85,8 @@ function backspace(){
 
 
 function numberAndOperatorInput(key){
-    input.focus()
+    if(document.body.offsetWidth<600) input.blur()
+    else input.focus()
     if(key=='*'|| key=='/' || key=='+' || key=='-'||key=='x'||key=='÷' || key=='^'){
         console.log(numbersToBeOperated,'here')
         if(numbersToBeOperated.length>0){
