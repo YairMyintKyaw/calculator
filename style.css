@@ -50,9 +50,9 @@ body{
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    font-size: 15px;
+    font-size: 16px;
     color: #ede6e3;
-    
+    word-spacing: 10px;
 }
 
 .buttonArea{
@@ -103,6 +103,7 @@ body{
     border: solid 1px black;
     cursor: pointer;
     font-size: 20px;
+    user-select: none;
 }
 
 .numberBtn:hover{
