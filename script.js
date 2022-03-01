@@ -30,26 +30,32 @@ function operate(operator,...numbers){
 const result = document.querySelector('.result')
 
 /* Input */
-const input=document.querySelector('input');
+const input=document.querySelector('#input');
 const numbersToBeOperated=[]
 let number='';
-
+let inputString=''
 input.addEventListener('keydown',(e)=>{
-    e.preventDefault()
-    let key=e.key;
+    if(e.key=='Enter'){
+        result.textContent=`Ans:${showResult(numbersToBeOperated,number)} || ''`
+        input.value=showResult(numbersToBeOperated,number)
+        number=showResult(numbersToBeOperated,number) || ''
+        numbersToBeOperated.length=0
+    }
+})
+input.addEventListener('input',(e)=>{
+    let key=e.data;
+    console.log(e)
     if(!isNaN(key) || key=='Backspace' || key=='Enter' || key=='*' || key=='/' || key=='+' || key=='-'){
-        if(key=='Backspace'){
+        if(e.inputType=='deleteContentBackward'){
             backspace()
-        }else if(key=='Enter'){
-            result.textContent=`Ans:${showResult(numbersToBeOperated,number)}`
-            input.value=showResult(numbersToBeOperated,number)
-            number=showResult(numbersToBeOperated,number)
-            numbersToBeOperated.length=0
         }else if(key.match(/[0-9+/*-]/)){
             console.log(number)
+            e.target.value=e.target.value.slice(0,e.target.value.length-1)
             numberAndOperatorInput(key)
         }
     }else{
+        e.target.value=e.target.value.slice(0,e.target.value.length-1)
+        console.log('key wrong')
         return false
     }
 
@@ -59,33 +65,30 @@ window.addEventListener('load',()=>{
     input.value=''
 })
 
-function backspace(){
-    let lastCharacter=input.value[input.value.length-1]
-    if(lastCharacter=='+'||lastCharacter=='-'||lastCharacter=='x'||lastCharacter=='÷' || lastCharacter=='^'){
+function backspace(check){
+    console.log(input.value)
+    let lastCharacter=inputString[inputString.length-1]
+    
+    if(lastCharacter=='+'||lastCharacter=='-'||lastCharacter=='*'||lastCharacter=='/' || lastCharacter=='^'){
         numbersToBeOperated.pop()
-        console.log(numbersToBeOperated)
-        input.value=input.value.slice(0,input.value.length-1)
-        number=numbersToBeOperated[numbersToBeOperated.length-1]
+        if(check==true) input.value=input.value.slice(0,input.value.length-1)
+        number=numbersToBeOperated[numbersToBeOperated.length-1];
         numbersToBeOperated.pop()
-    }else{
-        console.log('number',number)
-        if(number.length>0){
-            console.log('ti is in')
+        inputString=inputString.slice(0,inputString.length-1)
+    }else if(number.length>0){
             number=number.slice(0,number.length-1)
-            input.value=input.value.slice(0,input.value.length-1)
+            if(check==true) input.value=input.value.slice(0,input.value.length-1)
             console.log(showResult(numbersToBeOperated,number))
-
+            inputString=inputString.slice(0,inputString.length-1)
         }
-    }
-    result.textContent=`Ans:${showResult(numbersToBeOperated,number)}`
+    
+    result.textContent=`Ans:${showResult(numbersToBeOperated,number) || ''}`
 }
 
 
 function numberAndOperatorInput(key){
     if(key=='*'|| key=='/' || key=='+' || key=='-'||key=='x'||key=='÷' || key=='^'){
-        console.log(numbersToBeOperated,'here')
         if(numbersToBeOperated.length>0){
-            console.log('here')
             let lastCharacter=input.value[input.value.length-1];
             if(lastCharacter=='+'||lastCharacter=='-'
                 ||lastCharacter=='*'||lastCharacter=='/'
@@ -101,8 +104,8 @@ function numberAndOperatorInput(key){
         console.log(numbersToBeOperated)
     }
     input.value+=key=='*'?'x':key=='/'?'÷':key;
-    result.textContent=`Ans:${showResult(numbersToBeOperated,number)}`
-    
+    result.textContent=`Ans:${showResult(numbersToBeOperated,number) || ''}`
+    inputString+=key
 }
 
 function showResult(list,lastNumber){
@@ -120,7 +123,7 @@ function showResult(list,lastNumber){
     if(numberAndOperatorArray.indexOf('+')!=-1) operatorArray.push('+')
     solveStePByStep(numberAndOperatorArray,operatorArray)
     operatorArray.length=0
-    return numberAndOperatorArray[0].toString()
+    return numberAndOperatorArray[0].toString() || ''
 }
 function solveStePByStep(array,operatorArray){
     for(let i=0;i<operatorArray.length;i++){
@@ -194,12 +197,12 @@ for(let i=0;i<4;i++){
                     result.textContent='Ans:'
                 })
             }else if(operatorSymbols[index]=='DEL'){
-                numberBtn.addEventListener('click',backspace)
+                numberBtn.addEventListener('click',backspace.bind(null,true))
             }else if(operatorSymbols[index]='='){
                 numberBtn.addEventListener('click',()=>{
-                    result.textContent=`Ans:${showResult(numbersToBeOperated,number)}`
+                    result.textContent=`Ans:${showResult(numbersToBeOperated,number) || ''}`
                     input.value=showResult(numbersToBeOperated,number)
-                    number=showResult(numbersToBeOperated,number)
+                    number=showResult(numbersToBeOperated,number) || ''
                     numbersToBeOperated.length=0
                 })
             }
