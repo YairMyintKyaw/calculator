@@ -147,7 +147,7 @@ function solveStePByStep(array,operatorArray){
 }
 
 
-
+//console.log(/Andriod/i.test(navigator.userAgent.toLowerCase()))
 /* Numbers and Operator buttons */
 const numberButtons = document.querySelectorAll('.buttonArea div')[0];
 const operators = document.querySelectorAll('.buttonArea div')[1];
