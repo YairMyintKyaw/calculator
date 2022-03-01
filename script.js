@@ -33,27 +33,26 @@ const result = document.querySelector('.result')
 const input=document.querySelector('input');
 const numbersToBeOperated=[]
 let number='';
-input.addEventListener('touch',()=>{
-    if(document.body.offsetWidth<600) input.blur()
-    else input.focus()
-})
+
 input.addEventListener('keydown',(e)=>{
     e.preventDefault()
     let key=e.key;
-    if(key=='Backspace'){
-        backspace()
-    }else if(key.match(/^F[1-9]|^F1[0-2]$/)){
-        return
-    }else if(key=='Enter'){
-        result.textContent=`Ans:${showResult(numbersToBeOperated,number)}`
-        input.value=showResult(numbersToBeOperated,number)
-        number=showResult(numbersToBeOperated,number)
-        numbersToBeOperated.length=0
+    if(!isNaN(key) || key=='Backspace' || key=='Enter' || key=='*' || key=='/' || key=='+' || key=='-'){
+        if(key=='Backspace'){
+            backspace()
+        }else if(key=='Enter'){
+            result.textContent=`Ans:${showResult(numbersToBeOperated,number)}`
+            input.value=showResult(numbersToBeOperated,number)
+            number=showResult(numbersToBeOperated,number)
+            numbersToBeOperated.length=0
+        }else if(key.match(/[0-9+/*-]/)){
+            console.log(number)
+            numberAndOperatorInput(key)
+        }
+    }else{
+        return false
     }
-    if(key.match(/[0-9+/*-]/)){
-        console.log(number)
-        numberAndOperatorInput(key)
-    }
+
     })
 
 window.addEventListener('load',()=>{
@@ -61,8 +60,6 @@ window.addEventListener('load',()=>{
 })
 
 function backspace(){
-    if(document.body.offsetWidth<600) input.blur()
-    else input.focus()
     let lastCharacter=input.value[input.value.length-1]
     if(lastCharacter=='+'||lastCharacter=='-'||lastCharacter=='x'||lastCharacter=='÷' || lastCharacter=='^'){
         numbersToBeOperated.pop()
@@ -85,8 +82,6 @@ function backspace(){
 
 
 function numberAndOperatorInput(key){
-    if(document.body.offsetWidth<600) input.blur()
-    else input.focus()
     if(key=='*'|| key=='/' || key=='+' || key=='-'||key=='x'||key=='÷' || key=='^'){
         console.log(numbersToBeOperated,'here')
         if(numbersToBeOperated.length>0){

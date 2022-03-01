@@ -124,7 +124,7 @@ body{
 }
 
 .numberBtn:hover{
-    background-color: aliceblue;
+    background-color: rgb(216, 217, 218);
 }
 
 .operatorBtn{
@@ -135,6 +135,10 @@ body{
     color: #ede6e3;
 }
 
+.operatorBtn:hover{
+    background-color: #92140c;
+}
+
 .orangeBackground{
     background-color: orange;
     -moz-box-shadow:    inset  -8px -8px 3px rgb(143, 93, 0);
@@ -143,7 +147,7 @@ body{
 }
 
 .orangeBackground:hover{
-    background-color: rgb(255, 180, 40);
+    background-color: rgb(233, 152, 2);
 }
 
 
