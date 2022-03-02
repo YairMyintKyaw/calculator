@@ -66,12 +66,11 @@ window.addEventListener('load',()=>{
 })
 
 function backspace(check){
-    window.navigator.vibrate(500)
-    console.log(input.value)
     let lastCharacter=inputString[inputString.length-1]
     
     if(lastCharacter=='+'||lastCharacter=='-'||lastCharacter=='*'||lastCharacter=='/' || lastCharacter=='^'){
-        numbersToBeOperated.pop()
+        window.navigator.vibrate(50)
+        numbersToBeOperated.pop();
         if(check==true) input.value=input.value.slice(0,input.value.length-1)
         number=numbersToBeOperated[numbersToBeOperated.length-1];
         numbersToBeOperated.pop()
@@ -104,7 +103,7 @@ function numberAndOperatorInput(key){
         if(number.includes('.') && key=='.') return // allow only one point per a number
         number +=key
     }
-    window.navigator.vibrate(300)
+    window.navigator.vibrate(10)
     input.value+=key=='*'?'x':key=='/'?'÷':key;
     result.textContent=`Ans:${showResult(numbersToBeOperated,number) || ''}`
     inputString+=key
@@ -200,7 +199,6 @@ for(let i=0;i<4;i++){
                 numberBtn.addEventListener('click',backspace.bind(null,true))
             }else if(operatorSymbols[index]='='){
                 numberBtn.addEventListener('click',()=>{
-                    window.navigator.vibrate(500)
                     result.textContent=`Ans:${showResult(numbersToBeOperated,number) || ''}`
                     input.value=showResult(numbersToBeOperated,number)
                     number=showResult(numbersToBeOperated,number) || ''
