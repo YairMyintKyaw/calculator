@@ -36,7 +36,7 @@ let number='';
 let inputString=''
 input.addEventListener('keydown',(e)=>{
     if(e.key=='Enter'){
-        result.textContent=`Ans:${showResult(numbersToBeOperated,number)} || ''`
+        result.textContent=`Ans:${showResult(numbersToBeOperated,number) || ''} `
         input.value=showResult(numbersToBeOperated,number)
         number=showResult(numbersToBeOperated,number) || ''
         numbersToBeOperated.length=0
@@ -66,6 +66,7 @@ window.addEventListener('load',()=>{
 })
 
 function backspace(check){
+    window.navigator.vibrate(500)
     console.log(input.value)
     let lastCharacter=inputString[inputString.length-1]
     
@@ -87,9 +88,9 @@ function backspace(check){
 
 
 function numberAndOperatorInput(key){
+    let lastCharacter=input.value[input.value.length-1];
     if(key=='*'|| key=='/' || key=='+' || key=='-'||key=='x'||key=='÷' || key=='^'){
-        if(numbersToBeOperated.length>0){
-            let lastCharacter=input.value[input.value.length-1];
+        if(numbersToBeOperated.length>0){ 
             if(lastCharacter=='+'||lastCharacter=='-'
                 ||lastCharacter=='*'||lastCharacter=='/'
                 ||lastCharacter=='x'||lastCharacter=='÷' 
@@ -100,9 +101,10 @@ function numberAndOperatorInput(key){
         console.log(numbersToBeOperated)
     }
     else{
+        if(number.includes('.') && key=='.') return // allow only one point per a number
         number +=key
-        console.log(numbersToBeOperated)
     }
+    window.navigator.vibrate(300)
     input.value+=key=='*'?'x':key=='/'?'÷':key;
     result.textContent=`Ans:${showResult(numbersToBeOperated,number) || ''}`
     inputString+=key
@@ -146,8 +148,6 @@ function solveStePByStep(array,operatorArray){
     }
 }
 
-
-//console.log(/Andriod/i.test(navigator.userAgent.toLowerCase()))
 /* Numbers and Operator buttons */
 const numberButtons = document.querySelectorAll('.buttonArea div')[0];
 const operators = document.querySelectorAll('.buttonArea div')[1];
@@ -200,6 +200,7 @@ for(let i=0;i<4;i++){
                 numberBtn.addEventListener('click',backspace.bind(null,true))
             }else if(operatorSymbols[index]='='){
                 numberBtn.addEventListener('click',()=>{
+                    window.navigator.vibrate(500)
                     result.textContent=`Ans:${showResult(numbersToBeOperated,number) || ''}`
                     input.value=showResult(numbersToBeOperated,number)
                     number=showResult(numbersToBeOperated,number) || ''

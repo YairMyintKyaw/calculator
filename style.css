@@ -54,6 +54,8 @@ body{
     outline: none;
     font-size: 20px;
     color: #ede6e3;
+    user-select: none;
+    cursor: auto;
 }
 
 .inputContainer div{
@@ -63,6 +65,7 @@ body{
     font-size: 16px;
     color: #ede6e3;
     word-spacing: 10px;
+    overflow: auto;
 }
 
 .buttonArea{
