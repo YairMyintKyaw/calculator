@@ -44,18 +44,16 @@ input.addEventListener('keydown',(e)=>{
 })
 input.addEventListener('input',(e)=>{
     let key=e.data;
-    console.log(e)
     if(!isNaN(key) || key=='Backspace' || key=='Enter' || key=='*' || key=='/' || key=='+' || key=='-'){
         if(e.inputType=='deleteContentBackward'){
             backspace()
         }else if(key.match(/[0-9+/*-]/)){
-            console.log(number)
             e.target.value=e.target.value.slice(0,e.target.value.length-1)
             numberAndOperatorInput(key)
         }
     }else{
         e.target.value=e.target.value.slice(0,e.target.value.length-1)
-        console.log('key wrong')
+        window.navigator.vibrate(100)
         return false
     }
 
@@ -69,7 +67,6 @@ function backspace(check){
     let lastCharacter=inputString[inputString.length-1]
     
     if(lastCharacter=='+'||lastCharacter=='-'||lastCharacter=='*'||lastCharacter=='/' || lastCharacter=='^'){
-        window.navigator.vibrate(50)
         numbersToBeOperated.pop();
         if(check==true) input.value=input.value.slice(0,input.value.length-1)
         number=numbersToBeOperated[numbersToBeOperated.length-1];
@@ -78,7 +75,6 @@ function backspace(check){
     }else if(number.length>0){
             number=number.slice(0,number.length-1)
             if(check==true) input.value=input.value.slice(0,input.value.length-1)
-            console.log(showResult(numbersToBeOperated,number))
             inputString=inputString.slice(0,inputString.length-1)
         }
     
@@ -93,17 +89,22 @@ function numberAndOperatorInput(key){
             if(lastCharacter=='+'||lastCharacter=='-'
                 ||lastCharacter=='*'||lastCharacter=='/'
                 ||lastCharacter=='x'||lastCharacter=='÷' 
-                || lastCharacter=='^') return
+                || lastCharacter=='^') {
+                    window.navigator.vibrate(100)
+                    return
+                }
         }
         numbersToBeOperated.push(number,key);
         number='';
-        console.log(numbersToBeOperated)
     }
     else{
-        if(number.includes('.') && key=='.') return // allow only one point per a number
+        if(number.includes('.') && key=='.') {
+            window.navigator.vibrate(100)
+            return
+        } // allow only one point per a number
         number +=key
     }
-    window.navigator.vibrate(10)
+    window.navigator.vibrate(30)
     input.value+=key=='*'?'x':key=='/'?'÷':key;
     result.textContent=`Ans:${showResult(numbersToBeOperated,number) || ''}`
     inputString+=key
@@ -114,7 +115,6 @@ function showResult(list,lastNumber){
                                                                                 operator=='÷'?operator='/':
                                                                                 operator=='^'?operator='**':
                                                                                 operator});
-    console.log(numberAndOperatorArray)
     let operatorArray=[]
 
     if(numberAndOperatorArray.indexOf('**')!=-1) operatorArray.push('**')
@@ -140,7 +140,6 @@ function solveStePByStep(array,operatorArray){
                 rightNumber=array[operatorIndex-1]==''&& operatorIndex-1==0 && operatorArray[i]=='-'?'-'+array[operatorIndex+1]:
                             array[operatorIndex+1]==''?0 : array[operatorIndex+1];
             }
-            console.log(leftNumber,rightNumber)
             let newNumber=operate(operatorArray[i],+leftNumber,+rightNumber);
             array.splice(operatorIndex-1,3,newNumber)
         }
